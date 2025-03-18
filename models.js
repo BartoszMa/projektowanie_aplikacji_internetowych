@@ -9,10 +9,10 @@ class Auction {
 }
 
 class Offer {
-    constructor(author, price) {
+    constructor(author, price, auction_id) {
         this.author = author
         this.price = price
-
+        this.auction_id = auction_id
     }
 }
 
