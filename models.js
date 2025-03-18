@@ -4,7 +4,7 @@ class Auction {
         this.date_start = date_start
         this.date_end = date_end
         this.max_price = max_price
-        this.descritpion = description
+        this.description = description
     }
 }
 
