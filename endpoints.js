@@ -6,6 +6,7 @@ import {Auction, Offer} from "./models.js";
 export const router = express.Router();
 
 const dbConnector = new DbConnector("localhost", 3306, "root", "abc", "db");
+await dbConnector.initDb()
 const handlers = new Handlers(dbConnector);
 
 const asyncHandler = fn => (req, res, next) => {

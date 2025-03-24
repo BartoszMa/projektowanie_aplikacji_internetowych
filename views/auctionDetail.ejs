@@ -1,9 +1,9 @@
 <%- include('partials/header') %>
 <h1><%= auction.title %></h1>
 <p><strong>Description:</strong> <%= auction.description %></p>
-<p><strong>Starting Price:</strong> <%= auction.max_price %></p>
-<p><strong>Starting Price:</strong> <%= auction.date_start %></p>
-<p><strong>Starting Price:</strong> <%= auction.date_end %></p>
+<p><strong>Max price:</strong> <%= auction.max_price %></p>
+<p><strong>Date start:</strong> <%= auction.date_start %></p>
+<p><strong>Date end:</strong> <%= auction.date_end %></p>
 
 <% if (new Date() > new Date(auction.date_end)) { %>
     <p style="color: red;"><strong>This auction has ended. No more offers can be placed.</strong></p>
