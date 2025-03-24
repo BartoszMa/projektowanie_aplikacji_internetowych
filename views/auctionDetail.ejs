@@ -5,12 +5,21 @@
 <p><strong>Starting Price:</strong> <%= auction.date_start %></p>
 <p><strong>Starting Price:</strong> <%= auction.date_end %></p>
 
+<% if (new Date() > new Date(auction.date_end)) { %>
+    <p style="color: red;"><strong>This auction has ended. No more offers can be placed.</strong></p>
+<% } else { %>
+    <form action="/auctions/<%= auction.id %>/add-offer" method="get">
+        <button type="submit">Place an Offer</button>
+    </form>
+<% } %>
+
 <h2>Offers</h2>
 <ul>
     <% offers.forEach(offer => { %>
-        <li><%= offer.price %> by user <%= offer.author %></li>
+        <li><strong><%= offer.author %></strong>: $<%= offer.price %></li>
     <% }) %>
 </ul>
 
-<a href="/auctions/<%= auction.id %>/add-offer">Place an Offer</a>
 <%- include('partials/footer') %>
+
+
