@@ -1,5 +1,4 @@
 import express from 'express'
-import bodyParser from "express";
 import {router} from "./endpoints.js";
 
 const app = express()
@@ -7,7 +6,8 @@ const port = 3000
 
 
 app.set('view engine', 'ejs');
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use("/", router)
 

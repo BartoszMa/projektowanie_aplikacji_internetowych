@@ -2,7 +2,7 @@
 <h1>Ended Auctions</h1>
 <ul>
     <% auctions.forEach(auction => { %>
-        <li><%= auction.title %> - Ended</li>
+        <li><a href="/auctions/<%= auction.id %>"><%= auction.title %></a></li>
     <% }) %>
 </ul>
 <%- include('partials/footer') %>

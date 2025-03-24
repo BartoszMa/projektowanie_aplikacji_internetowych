@@ -1,9 +1,13 @@
 <%- include('partials/header') %>
+
 <h1>Add Auction</h1>
 <form action="/auctions" method="post">
     <label>Title: <input type="text" name="title" required></label><br>
     <label>Description: <textarea name="description" required></textarea></label><br>
-    <label>Starting Price: <input type="number" name="startingPrice" required></label><br>
+    <label>Starting Date: <input type="datetime-local" name="date_start" required></label><br>
+    <label>Ending Date: <input type="datetime-local" name="date_end" required></label><br>
+    <label>Max Price: <input type="number" name="max_price" required></label><br>
     <button type="submit">Create Auction</button>
 </form>
+
 <%- include('partials/footer') %>

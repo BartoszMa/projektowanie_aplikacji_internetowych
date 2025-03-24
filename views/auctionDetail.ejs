@@ -1,12 +1,14 @@
 <%- include('partials/header') %>
 <h1><%= auction.title %></h1>
 <p><strong>Description:</strong> <%= auction.description %></p>
-<p><strong>Starting Price:</strong> $<%= auction.startingPrice %></p>
+<p><strong>Starting Price:</strong> <%= auction.max_price %></p>
+<p><strong>Starting Price:</strong> <%= auction.date_start %></p>
+<p><strong>Starting Price:</strong> <%= auction.date_end %></p>
 
 <h2>Offers</h2>
 <ul>
     <% offers.forEach(offer => { %>
-        <li>$<%= offer.amount %> by User ID <%= offer.userId %></li>
+        <li><%= offer.price %> by user <%= offer.author %></li>
     <% }) %>
 </ul>
 

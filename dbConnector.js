@@ -65,11 +65,11 @@ class DbConnector {
         }
     }
 
-    async add_offer(offer, auction_id) {
+    async add_offer(offer) {
         try {
             const [result] = await this.pool.query(
                 "INSERT INTO offers (author, price, auction_id) VALUES (?, ?, ?)",
-                [offer.author, offer.price, auction_id]
+                [offer.author, offer.price, offer.auction_id]
             );
             return result;
         } catch (err) {

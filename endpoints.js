@@ -1,6 +1,7 @@
 import express from 'express'
 import DbConnector from "./dbConnector.js";
 import Handlers from "./handlers.js"
+import {Auction, Offer} from "./models.js";
 
 export const router = express.Router();
 
@@ -41,7 +42,9 @@ router.get("/add-auction", (req, res) => {
 });
 
 router.post("/auctions", asyncHandler(async (req, res) => {
-    const auction = req.body;
+    const { title, date_start, date_end, max_price, description } = req.body;
+    const auction = new Auction(title, date_start, date_end, max_price, description);
+
     await handlers.add_auction_handler(auction);
     res.redirect("/auctions/active");
 }));
@@ -51,9 +54,12 @@ router.get("/auctions/:auctionId/add-offer", (req, res) => {
 });
 
 router.post("/auctions/:auctionId/offers", asyncHandler(async (req, res) => {
-    const offer = req.body;
+    const { author, amount } = req.body;
     const auctionId = req.params.auctionId;
-    await handlers.add_offer_handler(offer, auctionId);
+
+    const offer = new Offer(author, amount, auctionId)
+
+    await handlers.add_offer_handler(offer);
     res.redirect(`/auctions/${auctionId}`);
 }));
 

@@ -1,6 +1,7 @@
 <%- include('partials/header') %>
 <h1>Place an Offer</h1>
 <form action="/auctions/<%= auctionId %>/offers" method="post">
+    <label>Author: <input type="text" name="author" required></label><br>
     <label>Amount: <input type="number" name="amount" required></label><br>
     <button type="submit">Submit Offer</button>
 </form>
