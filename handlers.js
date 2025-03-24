@@ -4,14 +4,14 @@ class Handlers {
     }
 
     async add_auction_handler(auction) {
-        await this.db_connector.add_auction(auction, (err, result) => {
+        return await this.db_connector.add_auction(auction, (err, result) => {
             if (err) console.error(err);
             else console.log(result);
         })
     }
 
     async add_offer_handler(offer, auction_id) {
-        await this.db_connector.add_offer(offer, auction_id, (err, result) => {
+        return await this.db_connector.add_offer(offer, auction_id, (err, result) => {
             if (err) console.error(err);
             else console.log(result);
         })

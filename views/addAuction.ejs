@@ -1,0 +1,9 @@
+<%- include('partials/header') %>
+<h1>Add Auction</h1>
+<form action="/auctions" method="post">
+    <label>Title: <input type="text" name="title" required></label><br>
+    <label>Description: <textarea name="description" required></textarea></label><br>
+    <label>Starting Price: <input type="number" name="startingPrice" required></label><br>
+    <button type="submit">Create Auction</button>
+</form>
+<%- include('partials/footer') %>

@@ -1,0 +1,14 @@
+<%- include('partials/header') %>
+<h1><%= auction.title %></h1>
+<p><strong>Description:</strong> <%= auction.description %></p>
+<p><strong>Starting Price:</strong> $<%= auction.startingPrice %></p>
+
+<h2>Offers</h2>
+<ul>
+    <% offers.forEach(offer => { %>
+        <li>$<%= offer.amount %> by User ID <%= offer.userId %></li>
+    <% }) %>
+</ul>
+
+<a href="/auctions/<%= auction.id %>/add-offer">Place an Offer</a>
+<%- include('partials/footer') %>

@@ -12,54 +12,52 @@ const asyncHandler = fn => (req, res, next) => {
         .catch(next);
 };
 
-router.post("/auctions", asyncHandler(async (req, res) => {
-    const auction = req.body;
-    const result = await handlers.add_auction_handler(auction);
-    res.status(201).json({
-        message: "Auction added successfully",
-        id: result.insertId
-    });
+router.get("/", (req, res) => {
+    res.render("main");
+});
+
+router.get("/auctions/active", asyncHandler(async (req, res) => {
+    const auctions = await handlers.get_all_actual_auctions_handler();
+    res.render("activeAuctions", { auctions });
 }));
 
-router.post("/auctions/:auctionId/offers", asyncHandler(async (req, res) => {
-    const offer = req.body;
-    const auctionId = req.params.auctionId;
-    const result = await handlers.add_offer_handler(offer, auctionId);
-    res.status(201).json({
-        message: "Offer added successfully",
-        id: result.insertId
-    });
+router.get("/auctions/ended", asyncHandler(async (req, res) => {
+    const auctions = await handlers.get_all_ended_auctions_handler();
+    res.render("endedAuctions", { auctions });
 }));
 
 router.get("/auctions/:auctionId", asyncHandler(async (req, res) => {
     const auctionId = req.params.auctionId;
     const auction = await handlers.get_auction_handler(auctionId);
-    if (!auction) {
-        return res.status(404).json({ error: "Auction not found" });
-    }
-    res.status(200).json(auction);
-}));
-
-router.get("/auctions/:auctionId/offers", asyncHandler(async (req, res) => {
-    const auctionId = req.params.auctionId;
     const offers = await handlers.get_all_auction_offers_handler(auctionId);
-    res.status(200).json(offers);
+    if (!auction) {
+        return res.status(404).send("Auction not found");
+    }
+    res.render("auctionDetail", { auction, offers });
 }));
 
-router.get("/auctions/ended", asyncHandler(async (req, res) => {
-    const auctions = await handlers.get_all_ended_auctions_handler();
-    res.status(200).json(auctions);
+router.get("/add-auction", (req, res) => {
+    res.render("addAuction");
+});
+
+router.post("/auctions", asyncHandler(async (req, res) => {
+    const auction = req.body;
+    await handlers.add_auction_handler(auction);
+    res.redirect("/auctions/active");
 }));
 
-router.get("/auctions/active", asyncHandler(async (req, res) => {
-    const auctions = await handlers.get_all_actual_auctions_handler();
-    res.status(200).json(auctions);
+router.get("/auctions/:auctionId/add-offer", (req, res) => {
+    res.render("addOffer", { auctionId: req.params.auctionId });
+});
+
+router.post("/auctions/:auctionId/offers", asyncHandler(async (req, res) => {
+    const offer = req.body;
+    const auctionId = req.params.auctionId;
+    await handlers.add_offer_handler(offer, auctionId);
+    res.redirect(`/auctions/${auctionId}`);
 }));
 
 router.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).json({
-        error: 'Something went wrong!',
-        message: err.message
-    });
+    res.status(500).send("Something went wrong!");
 });

@@ -1,0 +1,8 @@
+<%- include('partials/header') %>
+<h1>Ended Auctions</h1>
+<ul>
+    <% auctions.forEach(auction => { %>
+        <li><%= auction.title %> - Ended</li>
+    <% }) %>
+</ul>
+<%- include('partials/footer') %>
