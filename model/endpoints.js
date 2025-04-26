@@ -1,6 +1,6 @@
 import express from 'express'
-import DbConnector from "./dbConnector.js";
-import Handlers from "./handlers.js"
+import DbConnector from "../controller/dbConnector.js";
+import Handlers from "../controller/handlers.js"
 import {Auction, Offer} from "./models.js";
 
 export const router = express.Router();

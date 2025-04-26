@@ -1,5 +1,5 @@
 import express from 'express'
-import {router} from "./endpoints.js";
+import {router} from "./model/endpoints.js";
 import path from "path";
 
 const app = express()
